@@ -12,7 +12,9 @@ app.use(express.static('public'))
 app.use(cookieParser());
 app.use(helmet());
 app.use(cors({
-    origin: ['http://localhost:3000','https://todo-list-app-kohl-kappa.vercel.app/'], // Replace with your frontend URL
+    origin: [
+        'http://localhost:3000',
+        'https://todo-list-app-kohl-kappa.vercel.app/'], // Replace with your frontend URL
     credentials: true,
 }));
 
