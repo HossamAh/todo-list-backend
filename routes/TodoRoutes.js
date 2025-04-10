@@ -3,19 +3,20 @@ const router = express.Router();
 const TodosController = require('../controllers/TodosController');
 const paramIdMiddleware = require('../middlewares/paramId');
 const TodoValidatorMiddleware = require("../middlewares/TodoValidatorMiddleware");
-router.get("",TodosController.getAllTodos);
+const authMiddleware = require("../middlewares/authMiddleware");
+router.get("",authMiddleware,TodosController.getAllTodos);
 
 //parameter middleware for id
 router.param("id",paramIdMiddleware);
 
-router.delete("/:id",TodosController.deleteTodo);
+router.delete("/:id",authMiddleware,TodosController.deleteTodo);
 
 //update (put is for full update but patch is partial update) 
-router.put("/:id",TodosController.updateTodo);
-router.get('/:id',TodosController.getTodo);
+router.put("/:id",authMiddleware,TodosController.updateTodo);
+router.get('/:id',authMiddleware,TodosController.getTodo);
 
 
-router.post("",TodoValidatorMiddleware,TodosController.addTodo);
+router.post("",authMiddleware,TodoValidatorMiddleware,TodosController.addTodo);
 
 //export router to be used in the other module
 module.exports=router;

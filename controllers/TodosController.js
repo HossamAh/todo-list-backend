@@ -1,11 +1,12 @@
 let TodoModel = require("../models/TodosModel");
 const getAllTodos = async (req,res)=>{
-    let Todos = await TodoModel.find({});
+    let Todos = await TodoModel.find({user:req.user.usrid});
     res.send(Todos);
 };
 
 const addTodo = (req,res)=>{
     console.log(req.body);
+    req.body = {...req.body,user:req.user.usrid};
     let Todo = new TodoModel({...req.body,registeredAt:Date.now()});
     console.log(Todo);
     Todo.save().then(()=>{
