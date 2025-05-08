@@ -4,7 +4,12 @@ const TodosController = require('../controllers/TodosController');
 const paramIdMiddleware = require('../middlewares/paramId');
 const TodoValidatorMiddleware = require("../middlewares/TodoValidatorMiddleware");
 const authMiddleware = require("../middlewares/authMiddleware");
+
 router.get("",authMiddleware,TodosController.getAllTodos);
+
+router.get("/week",authMiddleware,TodosController.getTodosCurrentWeek);
+router.get("/today",authMiddleware,TodosController.getTodosToday);
+router.get("/overdue",authMiddleware,TodosController.getTodosoverdue);
 
 //parameter middleware for id
 router.param("id",paramIdMiddleware);
