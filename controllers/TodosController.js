@@ -27,10 +27,11 @@ const getTodosCurrentWeek = async (req, res) => {
 };
 
 const getTodosoverdue = async (req, res) => {
+    const today = new Date();
   let Todos = await TodoModel.find({
     user: req.user.usrid,
-    deadline: { $lte: Date.now() },
-    completed: false,
+    deadline: { $lt: today },
+    isCompleted: false,
   });
   res.send(Todos);
 };
